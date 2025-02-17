@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.header__container {
+  background-color: #1a1a1a;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: white;
+  height: 70px;
+}
+.header_logo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 250px;
+}
+.header_logo_container img {
+  width: 80%;
+  padding-top: 5px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+.delivery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  font-weight: bold;
+  padding: 5px;
+}
+.delivery p {
+  font-size: 10px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+.search select,
+.search input {
+  padding: 10px;
+  font-weight: bold;
+  outline: 1px solid white;
+}
+.search select {
+  /* border: none; */
+  border: 1px solid white;
+}
+.search input {
+  border: 1px solid white;
+  width: 100%;
+  margin-right: -2px;
+}
+.search svg {
+  padding: 7px;
+  background-color: #febd69;
+  color: #1a1a1a;
+}
+.search svg:hover {
+  background-color: #d49644;
+}
+.search:focus-within {
+  border: 2px solid rgb(235, 161, 173);
+}
+.order__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  gap: 10px;
+}
+.order__container p {
+  font-size: 10px;
+}
+.language {
+  width: 100px;
+  display: flex;
+  padding: 10px;
+}
+.language select {
+  background-color: #1a1a1a;
+  border: none;
+  color: white;
+}
+.language img {
+  width: 30%;
+}
+.cart {
+  position: relative;
+  margin-right: 15px;
+}
+.cart span {
+  position: absolute;
+  font-weight: bold;
+  top: -6px;
+  font-size: 20px;
+  background-color: #1a1a1a;
+  left: 16px;
+  color: orange;
+}
+.sign {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.order {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+.sign p,
+.order p {
+  font-size: 0.9rem;
+}
+.order__container a:hover,
+.delivery:hover,
+.header_logo_container a:hover,
+.lower__container ul li:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+}
+.lower__container {
+  background-color: #232f3e;
+  color: white;
+}
+.lower__container ul {
+  display: flex;
+  list-style: none;
+  gap: 5px;
+}
+.lower__container ul li {
+  padding: 8px;
+}
+.lower__container ul li:first-child {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+@media screen and (max-width: 576px) {
+  .header__container {
+    display: flex;
+    flex-direction: column !important;
+    height: auto;
+  }
+  .lower__container ul li:not(:first-child) {
+    display: none;
+  }
+  .language {
+    display: none;
+  }
+}
