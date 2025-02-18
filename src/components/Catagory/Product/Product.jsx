@@ -7,6 +7,7 @@ import Loader from "../../Loader/Loader";
 function Product() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(() => {
      setIsLoading(true);
     Axios.get("https://fakestoreapi.com/products")

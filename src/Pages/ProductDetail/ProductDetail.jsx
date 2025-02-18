@@ -36,7 +36,8 @@ setIsLoading(false);
           <Loader />
         ) : (
           <section className={css.productDetailContainer}>
-            <ProductCard product={product} />
+            <ProductCard product={product}  flex ={true}
+            renderDesc={true}/>
           </section>
         )}
       </Layouts>
