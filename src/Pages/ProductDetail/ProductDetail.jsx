@@ -4,7 +4,7 @@ import css from "./productdetail.module.css"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { productUrl } from '../../Api/basePoint'
-import ProductCard from '../../components/Catagory/Product/ProductCard'
+import ProductCard from '../../components/Product/ProductCard'
 import Loader from '../../components/Loader/Loader'
 
 

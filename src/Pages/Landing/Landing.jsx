@@ -2,7 +2,7 @@ import React from 'react'
 import Layouts from '../../components/Layouts/Layouts';
 
 import Catagory from '../../components/Catagory/Catagory';
-import Product from '../../components/Catagory/Product/Product';
+import Product from '../../components/Product/Product';
 
 import CarouselEffect from "../../components/Carousel/Carousel"
 
