@@ -1,11 +1,14 @@
 .catagory{
-   
-    height: 350px;
+ 
+   height: 350px;
     width: 300px;
-    background-color: white;
+     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    
 }
 .catagory img{
+    position: relative;
+    top: 30px; 
     width: 100%;
     object-fit: contain;
     max-block-size: 250px;
@@ -17,16 +20,16 @@
    
 }
 h2 {
-    
-    position: relative;
+     position: relative;
     top: 20px;
     left: 15px;
    
 }
-img{
+/* img{
   position: relative;
     top: 30px;  
-}
+} */
+
 .catagory p{
     padding: 5px;
     margin-top: 20px;
@@ -40,5 +43,5 @@ img{
     margin-top: -10%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    place-items: center;
+   place-items: center;
 }
