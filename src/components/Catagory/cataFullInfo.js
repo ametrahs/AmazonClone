@@ -12,21 +12,21 @@ export const cataFullInfo = [
       "https://m.media-amazon.com/images/I/81IfjxQYgOL._AC_UL480_FMwebp_QL65_.jpg",
   },
   {
-    title: "Diamond ring ",
-    name: "jewellery",
+    title: "Diamond ring",
+    name: "jewelery",
     imageLink:
       "https://m.media-amazon.com/images/I/81luYyzmmoL._AC_UL480_FMwebp_QL65_.jpg",
   },
-  {
-    title: "Lancôme  ",
-    name: "perfume",
-    imageLink:
-      "https://m.media-amazon.com/images/I/710fa-Et8LL._AC_UL480_FMwebp_QL65_.jpg",
-  },
   //   {
-  //     title: "Discover best fashion trends  ",
-  //     name: "men clothing",
+  //     title: "Lancôme",
+  //     name: "perfume",
   //     imageLink:
-  //       "https://m.media-amazon.com/images/I/71MDJ2AP+0L._AC_UL480_FMwebp_QL65_.jpg",
+  //       "https://m.media-amazon.com/images/I/710fa-Et8LL._AC_UL480_FMwebp_QL65_.jpg",
   //   },
+  {
+    title: "Discover best fashion trends  ",
+    name: "men's clothing",
+    imageLink:
+      "https://m.media-amazon.com/images/I/71MDJ2AP+0L._AC_UL480_FMwebp_QL65_.jpg",
+  },
 ];

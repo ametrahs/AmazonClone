@@ -15,8 +15,10 @@ function Routering() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/results" element={<Results />} />
+        
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/category/:categoryName" element={<Results />} />
+        
       </Routes>
     </Router>
   );
