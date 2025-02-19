@@ -34,7 +34,7 @@ dispatch({
       <Link to={`/products/${id}`}>
         <img src={image} className={css.img_container} alt={title} />
       </Link>
-      <div>
+      <div className={css.mtop}>
         <h3>{title}</h3>
         {renderDesc && <div style={{ maxWidth: "750px" }}>{description}</div>}
         <div className={css.rating}>
