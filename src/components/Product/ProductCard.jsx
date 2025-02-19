@@ -6,8 +6,8 @@ import {Link} from "react-router-dom"
 import { DataContext } from "../DataProvider/DataProvider";
 import {Type} from "../../Pages/Utility/action.type"
 
-function ProductCard({ product, flex, renderDesc }) {
-  const { image, title, id, rating = { rate: 0, count: 0 }, price,description } = product;
+function ProductCard({ product,renderDesc, flex,renderAdd }) {
+  const { image, title, id, rating , price,description } = product;
 
   const[state,dispatch]=useContext(DataContext)
 // console.log(state)
@@ -15,32 +15,44 @@ function ProductCard({ product, flex, renderDesc }) {
   const addToCart =() =>{
 dispatch({
   type: Type.ADD_TO_BASKET,
-  item :{
-    image, title, id, rating : { rate: 0, count: 0 }, price,description
-  }
-})
+  item: {
+    image,
+    title,
+    id,
+    rating: rating
+      ? { rate: rating.rate, count: rating.count }
+      : { rate: 0, count: 0 },
+    
+    price,
+    description,
+  },
+});
   }
 
   return (
     <div className={`${css.card_container} ${flex ? css.product_flexed : ""}`}>
       <Link to={`/products/${id}`}>
-        <img src={image} className={css.img_container} alt="" />
+        <img src={image} className={css.img_container} alt={title} />
       </Link>
       <div>
         <h3>{title}</h3>
-        {renderDesc && <div style={{maxWidth:"750px"}}>{description}</div>}
+        {renderDesc && <div style={{ maxWidth: "750px" }}>{description}</div>}
         <div className={css.rating}>
           {/* rating */}
-          <Rating value={rating.rate} precision={0.1} />
+          <Rating value={rating?.rate || 0} precision={0.1} />
           {/* count */}
-          <small>{rating.count}</small>
+          <small>{rating?.count || 0}</small>
         </div>
         <div>
           {/* price */}
           <CurrencyFormat amount={price} />
         </div>
 
-        <button className={css.btn} onClick ={addToCart}>add to cart</button>
+        {renderAdd && (
+          <button className={css.btn} onClick={addToCart}>
+            add to cart
+          </button>
+        )}
       </div>
     </div>
   );
