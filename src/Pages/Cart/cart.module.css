@@ -46,6 +46,9 @@
     display: flex;
     gap:20px;
 }
+.container div:not(.subtotal) {
+  height: auto !important;
+}
 @media screen and (max-width:968px){
     .container{
         flex-direction: column;
