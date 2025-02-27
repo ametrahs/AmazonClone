@@ -7,6 +7,7 @@ import { SlLocationPin } from "react-icons/sl";
 import LowerHeader from "./LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
 
+
 function Header() {
   const[{basket},dispatch]=useContext(DataContext)
   const totalItem = basket?.reduce((amount,item) =>{
@@ -59,7 +60,7 @@ function Header() {
                 <option value="">EN</option>
               </select>
             </Link>
-            <Link to="/signin" className={css.sign}>
+            <Link to="/auth" className={css.sign}>
               <p>Hello,Sign In</p>
               <span>Account & Lists</span>
             </Link>

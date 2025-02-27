@@ -13,8 +13,8 @@ function CarouselEffect() {
         showThumbs={false}
       >
         {img.map((imageItemLink, index) => (
-          <div key={index}>
-            <img src={imageItemLink} alt={`Slide ${index}`} />
+          <div>
+            <img key={index} src={imageItemLink} alt={`Slide ${index}`} />
           </div>
         ))}
       </Carousel>
