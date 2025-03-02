@@ -6,10 +6,11 @@ import { BiCart } from "react-icons/bi";
 import { SlLocationPin } from "react-icons/sl";
 import LowerHeader from "./LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
+import {auth} from "../../Pages/Utility/firebase"
 
 
 function Header() {
-  const[{basket},dispatch]=useContext(DataContext)
+  const[{user, basket},dispatch]=useContext(DataContext)
   const totalItem = basket?.reduce((amount,item) =>{
     return item.amount + amount 
   },0)
@@ -47,7 +48,7 @@ function Header() {
               <option value="">All</option>
             </select>
             <input type="text" placeholder="search Amazon" />
-            <BsSearch size={25} />
+            <BsSearch size={38} />
           </div>
           {/* right side link */}
           <div class={css.order__container}>
@@ -60,9 +61,20 @@ function Header() {
                 <option value="">EN</option>
               </select>
             </Link>
-            <Link to="/auth" className={css.sign}>
-              <p>Hello,Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && "/auth"} className={css.sign}>
+              <div>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                    <span onClick={() =>auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    <p> Hello, Sign In</p>
+                    <span>Account & Lists</span>
+                  </>
+                )}
+              </div>
             </Link>
             {/* orders */}
             <Link to="/orders" className={css.order}>

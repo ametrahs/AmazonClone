@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import css from "./signup.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Utility/firebase";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { DataContext } from "../../components/DataProvider/DataProvider";
-import {Type} from "../Utility/action.type"
+import { Type } from "../Utility/action.type";
+import {ClipLoader} from 'react-spinners'
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -15,49 +16,68 @@ function Auth() {
   const [error, setError] = useState("");
   // console.log(password, email)
 
-  const[{user},dispatch] = useContext(DataContext)
-  console.log(user)
+  const [{ user }, dispatch] = useContext(DataContext);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState({signIn:false, signUp:false})
+  // console.log(user)
 
   const authHandler = async (e) => {
     e.preventDefault();
+     if (!email || !password) {
+       setError("Please fill in all fields.");
+       return;
+     }
     try {
       if (e.target.name === "signin") {
         // Firebase sign-in
-
+setLoading({ ...loading, signIn: true });
         const userInfo = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
-        console.log(userInfo)
+        
+        // console.log(userInfo)
         console.log("User signed in successfully!");
         dispatch({
-          type:Type.SET_USER,
-          user:userInfo.user,
-        })
-      } else {
+          type: Type.SET_USER,
+          user: userInfo.user,
+        });
+        setLoading({ ...loading, signIn: false });
+        navigate('/');
+      }
+      
+      else {
         // Firebase sign-up
+        setLoading({ ...loading, signUp: true });
         const userInfo = await createUserWithEmailAndPassword(
           auth,
           email,
           password
-        ); 
-        console.log(userInfo);
+        );
+        // console.log(userInfo);
         console.log("User created successfully!");
         dispatch({
           type: Type.SET_USER,
           user: userInfo.user,
         });
+        setLoading({ ...loading, signUp: false });
+         navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      console.error(err.code);
+    
       if (err.code === "auth/email-already-in-use") {
         setError("This email is already in use. Please use a different email.");
+        
       } else if (err.code === "auth/invalid-credential") {
         setError("Invalid email or password. Please try again.");
+        
       } else {
         setError("An error occurred. Please try again later.");
+        
       }
+      setLoading({ signIn: false, signUp: false });
     }
   };
   /* const authHandler = async(e) => {
@@ -119,7 +139,7 @@ createUserWithEmailAndPassword(auth, email, password).then((userInfo) =>{
             name="signin"
             className={css.login_signInButton}
           >
-            Sign In
+            {loading.signIn ? <ClipLoader color="#000" size={15} /> : "Sign In"}
           </button>
         </form>
         {/* agreement */}
@@ -135,8 +155,15 @@ createUserWithEmailAndPassword(auth, email, password).then((userInfo) =>{
           name="signup"
           className={css.login_registerBtn}
         >
-          Create your Amazon Account
+          {loading.signUp ? (
+            <ClipLoader color="#000" size={15} />
+          ) : (
+            "Create your Amazon Account"
+          )}
         </button>
+        {error && (
+          <small style={{ paddingTop: "5px", color: "red" }}>{error}</small>
+        )}
       </div>
     </section>
   );
