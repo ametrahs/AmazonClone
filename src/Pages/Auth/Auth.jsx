@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import css from "./signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../Utility/firebase";
 import {
   signInWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import { Type } from "../Utility/action.type";
-import {ClipLoader} from 'react-spinners'
+import { ClipLoader } from "react-spinners";
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -18,25 +18,27 @@ function Auth() {
 
   const [{ user }, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState({signIn:false, signUp:false})
+  const [loading, setLoading] = useState({ signIn: false, signUp: false });
+  const navStateData = useLocation();
+  console.log(navStateData);
   // console.log(user)
 
   const authHandler = async (e) => {
     e.preventDefault();
-     if (!email || !password) {
-       setError("Please fill in all fields.");
-       return;
-     }
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
     try {
       if (e.target.name === "signin") {
         // Firebase sign-in
-setLoading({ ...loading, signIn: true });
+        setLoading({ ...loading, signIn: true });
         const userInfo = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
-        
+
         // console.log(userInfo)
         console.log("User signed in successfully!");
         dispatch({
@@ -44,10 +46,8 @@ setLoading({ ...loading, signIn: true });
           user: userInfo.user,
         });
         setLoading({ ...loading, signIn: false });
-        navigate('/');
-      }
-      
-      else {
+        navigate(navStateData?.state?.redirect || "/");
+      } else {
         // Firebase sign-up
         setLoading({ ...loading, signUp: true });
         const userInfo = await createUserWithEmailAndPassword(
@@ -62,42 +62,21 @@ setLoading({ ...loading, signIn: true });
           user: userInfo.user,
         });
         setLoading({ ...loading, signUp: false });
-         navigate("/");
+        navigate(navStateData?.state?.redirect || "/");
       }
     } catch (err) {
       console.error(err.code);
-    
+
       if (err.code === "auth/email-already-in-use") {
         setError("This email is already in use. Please use a different email.");
-        
       } else if (err.code === "auth/invalid-credential") {
         setError("Invalid email or password. Please try again.");
-        
       } else {
         setError("An error occurred. Please try again later.");
-        
       }
       setLoading({ signIn: false, signUp: false });
     }
   };
-  /* const authHandler = async(e) => {
-    e.preventDefault();
-    // console.log(e.target.name)
-    if (e.target.name == "signin") {
-      // firebase auth
-      signInWithEmailAndPassword(auth, email, password).then((userInfo) =>{
-        console.log(userInfo)
-      }).catch((err) =>{
-        console.log(err)
-      })
-
-    }else{
-createUserWithEmailAndPassword(auth, email, password).then((userInfo) =>{
-        console.log(userInfo)
-      }).catch((err) =>{
-        console.log(err)
-      })
-  }}; */
 
   return (
     <section className={css.login}>
@@ -112,6 +91,18 @@ createUserWithEmailAndPassword(auth, email, password).then((userInfo) =>{
       {/* form */}
       <div className={css.login_container}>
         <h1>Sign-In</h1>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              padding: "5px",
+              textAlign: "center",
+              color: "hotpink",
+              fontWeight: "bold",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
         <form onSubmit={authHandler} action="">
           <div>
             <label htmlFor="email">Email</label>
