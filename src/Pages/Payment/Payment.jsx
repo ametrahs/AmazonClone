@@ -14,7 +14,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function Payment() {
-  const [{ user, basket }] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
   console.log(user);
   const [cardError, setCardError] = useState(null);
   const [processing, setProcessing] = useState(false);
@@ -85,20 +85,9 @@ const handlePayment = async (e) => {
       created: paymentIntent.created,
     });
 
-
-    // console.log(confirmation);
-    // 3. Save order to Firestore and clear basket
-
-    /* await db
-      .collection("users")
-      .doc(user.uid)
-      .collection("orders")
-      .doc(paymentIntent.id)
-      .set({
-        basket: basket,
-        amount: paymentIntent.amount,
-        created: paymentIntent.created,
-      }); */
+// empty z baskket
+dispatch({ type: "EMPTY_BASKET" });
+   
 
     if (paymentIntent.status === "succeeded") {
       // 3. Save order to Firestore and clear basket
