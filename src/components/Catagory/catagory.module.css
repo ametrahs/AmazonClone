@@ -1,17 +1,19 @@
 .catagory{
  
    height: 350px;
-    width: 300px;
+   width: 340px;
+    /* width: 300px; */
      background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     
 }
 .catagory img{
     position: relative;
-    top: 30px; 
+    top: 25px; 
     width: 100%;
     object-fit: contain;
-    max-block-size: 250px;
+    max-height: 250px;
+    /* max-block-size: 250px; */
     padding: 0px 10px;
 }
 .catagory a{
@@ -19,16 +21,14 @@
     color: rgb(35,35,35);
    
 }
-h2 {
+.catagory h2 {
      position: relative;
     top: 20px;
     left: 15px;
-   
+   padding: 5px;
+  
 }
-/* img{
-  position: relative;
-    top: 30px;  
-} */
+
 
 .catagory p{
     padding: 5px;

@@ -35,7 +35,7 @@ function Cart() {
           <div className="center">
             <h2>Hello, {user ? user.displayName : "Dear customer"}</h2>
             <h3>Your shopping basket</h3>
-            <hr />
+            <hr  style={{borderColor :'gold'}}/>
           </div>
 
           {basket?.length == 0 ? (

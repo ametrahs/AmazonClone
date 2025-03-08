@@ -24,7 +24,7 @@ export const cataFullInfo = [
   //       "https://m.media-amazon.com/images/I/710fa-Et8LL._AC_UL480_FMwebp_QL65_.jpg",
   //   },
   {
-    title: "Discover best fashion trends  ",
+    title: "Discover best fashion trend  ",
     name: "men's clothing",
     imageLink:
       "https://m.media-amazon.com/images/I/71MDJ2AP+0L._AC_UL480_FMwebp_QL65_.jpg",
